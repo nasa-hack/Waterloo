@@ -5,7 +5,11 @@ import PIL, PIL.Image
 import io
 
 def test(request):
-    # Construct the graph
+    longt = request.GET.get('longitude', 27.999912)
+    lat = request.GET.get('latitude', 72.567)
+    return get_graph(longt, latt)
+
+def get_graph(long, lat):
     x = arange(0, 2*pi, 0.01)
     s = cos(x)**2
     plot(x, s)
@@ -15,13 +19,15 @@ def test(request):
     title('Simple Graph!')
     grid(True)
 
+
     # Store image in a string buffer
-    buffer = io.StringIO()
+    buffer = io.BytesIO()
     canvas = pylab.get_current_fig_manager().canvas
     canvas.draw()
     pilImage = PIL.Image.frombytes("RGB", canvas.get_width_height(), canvas.tostring_rgb())
-    pilImage.save(buffer.decode("utf-8"), "PNG")
+    pilImage.save(buffer, "PNG")
     pylab.close()
 
-    # Send buffer in a http response the the browser with the mime type image/png set
-    return HttpResponse(buffer.getvalue(), mimetype="image/png")
+    # Send buffer in a http response the the browser with the mime type image/png set'''
+
+    return HttpResponse(buffer.getvalue(), content_type="image/png")
