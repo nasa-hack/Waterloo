@@ -1,0 +1,7 @@
+{
+  "name": "waterloo",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}
