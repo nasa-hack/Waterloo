@@ -1,15 +1,18 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from matplotlib import pylab
 from pylab import *
 import PIL, PIL.Image
 import io
+from plot.longilati import smallvalues
 
 def test(request):
-    longt = request.GET.get('longitude', 27.999912)
-    lat = request.GET.get('latitude', 72.567)
-    return get_graph(longt, lat)
+    longt = request.GET.get('lon', 27.999912)
+    lat = request.GET.get('lat', 72.567)   
+    x=smallvalues(lat, longt)
+    print(x, lat, longt)
+    return HttpResponse(x)
 
-def get_graph(long, lat):
+'''def get_graph(long, lat):
     x = arange(0, 2*pi, 0.01)
     s = cos(x)**2
     plot(x, s)
@@ -28,6 +31,9 @@ def get_graph(long, lat):
     pilImage.save(buffer, "PNG")
     pylab.close()
 
-    # Send buffer in a http response the the browser with the mime type image/png set'''
+    # Send buffer in a http response the the browser with the mime type image/png set
 
     return HttpResponse(buffer.getvalue(), content_type="image/png")
+
+import pandas as pd
+'''
