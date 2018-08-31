@@ -9,7 +9,7 @@ def test(request):
     longt = request.GET.get('lon', 27.999912)
     lat = request.GET.get('lat', 72.567)   
     x=smallvalues(lat, longt)
-    print(x, lat, longt)
+    #print(x, lat, longt)
     return HttpResponse(x)
 
 '''def get_graph(long, lat):

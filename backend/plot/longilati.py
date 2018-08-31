@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import json
 
-g1=pd.read_csv('extra/newdelhi.csv')
+g1=pd.read_csv('plot/extra/newdelhi.csv')
 g2=g1.iloc[:,3:]
 longi=[]
 lati=[]
@@ -30,27 +30,16 @@ def smallvalues(lat,lon):
             
     keys=g2.head(0)
     keys=keys.columns.tolist() 
-    jsonvalue=g2.iloc[[index]]
-    site=g2['SITE_NAME']
-    jsonsite=jsonvalue['SITE_NAME']
-    str(jsonsite)
-    site=site.tolist()
-    #print(site)
-    jsonvalue1=jsonvalue.values.tolist()
-    for i in range(0,6):
-        g1dict[keys[i]]= jsonvalue1[0][i]
-        jsondumps=json.dumps(g1dict)
-    print(jsonsite)
-    #print(jsonvalue['SITE_NAME'])
-    for j in range(0,289):
-        if jsonsite==site[j]:
-            jsonvalue=g2.iloc[[j]]
-            jsonvalue1=jsonvalue.values.tolist()
-            print(jsonvalue1)
-                
-#print(jsonvalue)
-      
-smallvalues(7.009,32.0987)
+    #jsonvalue=g2[index]#['SITE_NAME']
+    #site=g2['SITE_NAME']
+    #g2.iloc[g2['SITE_NAME']==jsonvalue['SITE_NAME'],:]
+    dumpjs=g2.loc[g2['SITE_NAME']==g2.iloc[index, :]['SITE_NAME']]
+    #print(dumpjs)
+    #jsonvalue1=jsonvalue.values.tolist()
+    return dumpjs.to_json(orient = 'records')
+    
+
+#print(smallvalues(7.009,32.0987))
 
 
     
