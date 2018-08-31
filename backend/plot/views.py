@@ -7,7 +7,7 @@ import io
 def test(request):
     longt = request.GET.get('longitude', 27.999912)
     lat = request.GET.get('latitude', 72.567)
-    return get_graph(longt, latt)
+    return get_graph(longt, lat)
 
 def get_graph(long, lat):
     x = arange(0, 2*pi, 0.01)
