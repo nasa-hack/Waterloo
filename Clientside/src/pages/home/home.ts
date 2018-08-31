@@ -29,16 +29,19 @@ export class HomePage {
       maxZoom: 10
     }).on('click',(e)=>{
       var popLocation= e.latlng;
+      localStorage.setItem('lat',popLocation['lat']);
+      localStorage.setItem('lng',popLocation['lng']);
       var popup = leaflet.popup()
       .setLatLng(popLocation)
       .setContent("Lat, Lon : "+popLocation)
       .openOn(this.map)
     }).on('locationfound', (e) => {
       let markerGroup = leaflet.featureGroup();
+      localStorage.setItem('lat',e.latitude);
+      localStorage.setItem('lng',e.longitude);
       let marker: any = leaflet.marker([e.latitude, e.longitude]).on('click', () => {
         alert('Marker clicked');
       })
-      let marker1 :any = leaflet.marker([])
       markerGroup.addLayer(marker);
       this.map.addLayer(markerGroup);
       }).on('locationerror', (err) => {
