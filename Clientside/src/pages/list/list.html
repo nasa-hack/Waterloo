@@ -8,16 +8,15 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
-      <ion-icon [name]="item.icon" item-start></ion-icon>
-      {{item.title}}
-      <div class="item-note" item-end>
-        {{item.note}}
-      </div>
-    </button>
-  </ion-list>
-  <div *ngIf="selectedItem" padding>
-    You navigated here from <b>{{selectedItem.title}}</b>
-  </div>
+  <ion-card *ngFor="let item of items">
+    <img src="{{item.img}}" width="100%;" height="200px;"/>
+    <ion-card-content>
+      <ion-card-title style="color:white">
+        {{item.name}}
+        </ion-card-title>
+      <p style="color:white">
+       {{item.description}}
+      </p>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

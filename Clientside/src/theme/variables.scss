@@ -35,10 +35,11 @@ $app-direction: ltr;
 
 $colors: (
   primary:    #488aff,
-  secondary:  #32db64,
+  secondary:  #0B2239,
   danger:     #f53d3d,
-  light:      #f4f4f4,
-  dark:       #222
+  light:      #1c2331,
+  dark:       #222,
+  text:       #fff,
 );
 
 
@@ -47,7 +48,15 @@ $colors: (
 // iOS only Sass variables can go here
 
 
+//top tabs
+$toolbar-md-background: color($colors,secondary);
 
+
+//bottom tabs
+$tabs-md-background: color($colors,light);
+
+$list-md-background-color:color($colors,light);
+$list-md-text-color:color($colors,text);
 
 // App Material Design Variables
 // --------------------------------------------------
