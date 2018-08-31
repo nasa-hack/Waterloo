@@ -2,6 +2,7 @@
 client side of this repo
 
 ## Technology
-Ionic Framework
-Chart.js
-js
+
+### Ionic Framework
+### Chart.js
+### js
