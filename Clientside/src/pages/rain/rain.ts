@@ -3,6 +3,8 @@ import { NavController, NavParams,Nav} from 'ionic-angular';
 import { Chart } from 'chart.js';
 
 import { ListPage } from '../list/list';
+import { AppProvider } from '../../providers/app/app';
+
 
 /**
  * Generated class for the RainPage page.
@@ -22,16 +24,18 @@ export class RainPage {
   barChart: any;
   doughnutChart: any;
   lineChart: any;
-
+  result:any;
+  error:any;
   data = [65, 59, 80, 81, 56, 55, 40];
   label = ["January", "February", "March", "April", "May", "June", "July"];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,public nav:Nav) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public nav:Nav,public app:AppProvider) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad RainPage');
     this.Chart();
+    this.getdata();
   }
 
   Chart(){
@@ -69,6 +73,14 @@ export class RainPage {
     });
 
 }
+
+getdata(){
+  this.app.getData(localStorage.getItem("lat"),localStorage.getItem("lng")).subscribe(res=>{
+    this.result=res;
+},err=>{
+    this.error="Someting Went Wrong";
+});
+ }
 
 
   backButton(){

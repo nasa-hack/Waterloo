@@ -1,6 +1,7 @@
 import { Component,ViewChild } from '@angular/core';
 import { NavController, NavParams,Nav} from 'ionic-angular';
 import { Chart } from 'chart.js';
+import { AppProvider } from '../../providers/app/app';
 
 import { ListPage } from '../list/list';
 
@@ -22,15 +23,17 @@ export class PopulationPage {
   barChart: any;
   doughnutChart: any;
   lineChart: any;
-
+  result:any;
+  error:any;
   data = [65, 59, 80, 81, 56, 55, 40];
   label = ["January", "February", "March", "April", "May", "June", "July"];
-  constructor(public navCtrl: NavController, public navParams: NavParams,public nav:Nav) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public nav:Nav,public app:AppProvider) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PopulationPage');
     this.Chart();
+    this.getdata();
   }
 
   Chart(){
@@ -68,6 +71,15 @@ export class PopulationPage {
     });
 
 }
+
+getdata(){
+  this.app.getData(localStorage.getItem("lat"),localStorage.getItem("lng")).subscribe(res=>{
+    this.result=res;
+},err=>{
+    this.error="Someting Went Wrong";
+});
+ }
+
 
 
   backButton(){
