@@ -16,7 +16,7 @@ export class AppProvider {
 
   
   getData(lat,long){
-    return this.http.get("hello world"+lat+long);
+    return this.http.get("http://192.168.137.1:8000/plot/test"+"?lon="+long+"&lat="+lat);
 }
 
 }

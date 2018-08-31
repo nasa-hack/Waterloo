@@ -1,7 +1,7 @@
 import { Component,ViewChild } from '@angular/core';
 import { NavController, NavParams,Nav} from 'ionic-angular';
 import { Chart } from 'chart.js';
-
+import 'rxjs/add/operator/map'
 import { ListPage } from '../list/list';
 import { AppProvider } from '../../providers/app/app';
 
@@ -26,16 +26,19 @@ export class RainPage {
   lineChart: any;
   result:any;
   error:any;
-  data = [65, 59, 80, 81, 56, 55, 40];
-  label = ["January", "February", "March", "April", "May", "June", "July"];
+  dataPM = [];
+  dataPRM = [];
+  dataM=[];
+  label = [];
 
   constructor(public navCtrl: NavController, public navParams: NavParams,public nav:Nav,public app:AppProvider) {
+    this.getdata();
   }
 
   ionViewDidLoad() {
+    console.log(this.dataPRM)
     console.log('ionViewDidLoad RainPage');
     this.Chart();
-    this.getdata();
   }
 
   Chart(){
@@ -46,7 +49,7 @@ export class RainPage {
             labels: this.label,
             datasets: [
                 {
-                    label: "My First dataset",
+                    label: "PreMonsoon",
                     fill: false,
                     lineTension: 0.1,
                     backgroundColor: "rgba(75,192,192,0.4)",
@@ -64,9 +67,53 @@ export class RainPage {
                     pointHoverBorderWidth: 2,
                     pointRadius: 1,
                     pointHitRadius: 10,
-                    data: this.data,
+                    data: this.dataPRM,
                     spanGaps: false,
-                }
+                },
+                {
+                  label: "Monsoon",
+                  fill: false,
+                  lineTension: 0.1,
+                  backgroundColor: "rgba(75,192,192,0.4)",
+                  borderColor: "rgba(70,192,192,1)",
+                  borderCapStyle: 'butt',
+                  borderDash: [],
+                  borderDashOffset: 0.0,
+                  borderJoinStyle: 'miter',
+                  pointBorderColor: "rgba(75,192,192,1)",
+                  pointBackgroundColor: "#fff",
+                  pointBorderWidth: 1,
+                  pointHoverRadius: 5,
+                  pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                  pointHoverBorderColor: "rgba(220,220,220,1)",
+                  pointHoverBorderWidth: 2,
+                  pointRadius: 1,
+                  pointHitRadius: 10,
+                  data: this.dataM,
+                  spanGaps: false,
+              },
+              {
+                label: "PostMonsoon",
+                fill: false,
+                lineTension: 0.1,
+                backgroundColor: "rgba(75,192,192,0.4)",
+                borderColor: "rgba(70,192,192,1)",
+                borderCapStyle: 'butt',
+                borderDash: [],
+                borderDashOffset: 0.0,
+                borderJoinStyle: 'miter',
+                pointBorderColor: "rgba(75,192,192,1)",
+                pointBackgroundColor: "#fff",
+                pointBorderWidth: 1,
+                pointHoverRadius: 5,
+                pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                pointHoverBorderColor: "rgba(220,220,220,1)",
+                pointHoverBorderWidth: 2,
+                pointRadius: 1,
+                pointHitRadius: 10,
+                data: this.dataPM,
+                spanGaps: false,
+            }
             ]
         }
 
@@ -76,7 +123,13 @@ export class RainPage {
 
 getdata(){
   this.app.getData(localStorage.getItem("lat"),localStorage.getItem("lng")).subscribe(res=>{
-    this.result=res;
+   this.result=res;
+   this.result.map(r=>{
+     this.dataPM.push(r.POSTMONSOONKHARIF);
+     this.dataM.push(r.MONSOON);
+     this.dataPRM.push(r.PREMONSOON);
+     this.label.push(r.YEAR_OBS);
+   })
 },err=>{
     this.error="Someting Went Wrong";
 });

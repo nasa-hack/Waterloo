@@ -77,6 +77,7 @@ export class WaterPage {
     getdata(){
     this.app.getData(localStorage.getItem("lat"),localStorage.getItem("lng")).subscribe(res=>{
       this.result=res;
+      console.log(this.result)
   },err=>{
       this.error="Someting Went Wrong";
   });
