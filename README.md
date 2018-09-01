@@ -9,7 +9,7 @@ A project to find the location and level of waters of time over time
    - prediction of data : for levels, precepitation etc.
    - We plan to expand our app and make it more detailed. Add maps which shows the ground water,precipitationnetc. level over the next 10 years to make it more interactive and easy to use. Add a compare feature so that land owners and farmers can easily determine where to buy the land.
 
-## NASA HACK
+## Resources used
 
 ## Population Api
 http://api.population.io/1.0/population/India{{CountryName}}/19{{Age}}
