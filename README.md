@@ -1,5 +1,5 @@
 # Waterloo
-A project to find the location and level of waters of time over time
+A project to find the location and level of water and analyzing over time.
 
 ## Demo
 https://nasa-hack.github.io/
